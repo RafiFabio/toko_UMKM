@@ -1,0 +1,24 @@
+# Docker for production memanfaatkan postgre dan nginx dari server
+services:
+  laravel_umkm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_umkm
+    env_file:
+      - .env
+    ports:
+      - "8004:8000"
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/vendor
+    networks:
+      - nginx
+      - mysql
+
+
+networks:
+  nginx:
+    external: true
+  mysql:
+    external: true
